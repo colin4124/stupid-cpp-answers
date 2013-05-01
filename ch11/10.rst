@@ -1,7 +1,44 @@
 习题10
 ===============================
 
-看完题目之后可以分成以下步骤：
+Tips:
+    
+    阅读代码时顺序：
+
+    1. 先看main函数，在main里看用到了Professor类,了解到它定义了一个对象prof1，然后就有两个疑问：
+
+        1. 括号里的每一形参代表的是什么意思
+
+           ::
+
+              prof1(24, "colin", "male", 1993, 1, 31)
+           
+        2. prof1.input() 和 output()具体是干嘛的
+
+    2. 与疑问直接相关的是Professor类，所以找到它，知道：
+
+        1. 成员函数是类内声明，类外定义，所以应该在类外详细看它定义了什么
+        2. 成员数据是一个BirthDate类的对象birthday, 知道下一步应该去看它。
+        3. | 看到类外的定义，发现Professor类的构造函数有调用了Teacher类的构造函数和birthday对象的构造函数，
+           | 看到Professor类的构造函数的形参中，前面三个是给Teacher类，后三个是给birthday对象的。
+        4. 成员函数涉及到Teacher类的，和birthday对象
+    
+    3.好了，我们下一步就是看BirthDate类和Tearcher类。
+        
+        1. | BirthDate类的构造函数知道，1993 1 31 这个三个形参分别给year month day 三个变量赋值。
+           | input() 的功能是把输入三个整数赋值给 year month day 三个变量
+           | output() 是输入 这个三个变量的值
+        2. | Teacher类的构造函数知道，24 "colin" "male" 分别赋值给 num  name  sex 三个变量的
+           | output() 是输入 这个三个变量的值
+
+阅读明白之后，就是教你怎么写的过程了。
+
+    
+     1. 题目提到多少个类，就定义多少个，然后分别按照题目的要求给类定义成员函数和数据函数
+     2. 看11.8的题目（388页），先写基类 Teacher 再写 引用到的BirthDate 类,最后才是派生类Professor
+     3. 把类写完了，最后就是写main()函数实现这些功能了。
+
+分成以下步骤：
 
 由于下面要用到string 声明字符串变量，所以记得要包含string 头文件： 
 
@@ -20,8 +57,8 @@
 	class Teacher
 	{
 	public:
-		Teacher(int, string, string);
-		void output();
+		Teacher(int, string, string);    //每个类都要定义构造函数，这样的好处是可以在定义一个对象时，顺便赋值
+		void output();                   //题目要求最后都得输入值，所以在每个类中都定义输入的函数，派生类的就直接调用基类的就可以了
 
 	private:
 		int num;
@@ -113,7 +150,7 @@
 	void Professor::output()
 	{
 		Teacher::output();
-		birthday.output();
+		birthday.output();  //这里不能是BirthDate::output(),因为已经定义了对象，直接引用对象的成员函数
 	}
 
 最后一步：定义 main 函数
