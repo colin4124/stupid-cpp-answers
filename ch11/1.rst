@@ -1,0 +1,89 @@
+习题1
+=======
+
+打开354页看到例11.1,发现：
+
+- **Class** 是错的，应该是 **class**
+- 这里没有包含头文件和命名空间,所以增加：
+
+.. code-block:: c++ 
+
+   #include <iostream> 
+   #include <string>   //详见 P157 line 3
+   using namespace std; 
+
+下面我们分析下例11.1 访问共有基类 的代码：
+``````````````````````````````````````````
+
+.. code-block:: c++ 
+
+   class Student       //声明一个叫Student的类
+   {
+   public:              //由于成员数据是私有的，类外不能直接引用，所以需要公有的成员函数来操作。详见239页 
+      void get_value()  //实现了对私有数据进行赋值的功能 
+	    {
+        cin >> num >> name >> sex;
+	    }
+      void display()    //实现了对赋值之后的私有数据输出的功能
+	    {
+        cout << "num:" << num <<endl;
+	      cout << "name:" << name <<endl;
+	      cout << "sex:" << sex <<endl;
+	    }
+      private:            //把数据设置成私有的。为什么这么做，请参见256页的“类的封装性和信息隐蔽”
+	       int num;
+	       string name;    //string 声明的变量是字符串类型，意味着你可以赋值给一个变量多个字母
+         char sex;       //char 声明的是字符类型，意味着你只能输入 f 和 m 一个字符作为性别的标志,如果想用man 和 woman代替，就可以用string sex
+  };                  //别忘记最后还有个 ; 号
+
+| 按照题目的意思，Student作为基类，那么下面就需要声明一个Student1作为派生类。关于派生的概念，参见374页
+| 请阅读书上的“由于…………数据成员”的那段话，然后继续看下面的：
+
+.. code-block:: c++ 
+
+   class Student1: public Student
+   {
+   public:
+     void input()
+     {
+       cin >> age >> addr;
+     } 
+     void display_1()
+     {
+       display();
+       cout << "age:" << age << endl;
+       cout << "address:" << addr <<endl;
+     }
+    private:
+      int age;
+      string addr;
+    };
+
+类已经声明完了，接下来就是要写main函数来使用它们了：
+
+.. code-block:: c++ 
+
+   int main()
+   {
+      Student1 stud;    //定义了Student1类的对象stud
+      
+      cout << "请输入学号，姓名，性别，年龄和地址:\n";
+      stud.input();    //参加248页的“对象成员的引用”
+      stud.display_1();
+
+      return 0;
+   }
+
+| 你只要把以上代码，最好是自己敲的，别粘贴复制。写到一个以 .cpp 为后缀的文件里，编译运行即可。
+| 这是运行后的结果，加粗的字体代表是我输入的:
+
+  | 请输入学号，姓名，性别，年龄和地址:
+  | **4124 colin m 20 TYUST**
+  | num:4124
+  | name:colin
+  | sex:m
+  | age:20
+  | address:TYUST
+
+         
+          

@@ -1,0 +1,131 @@
+习题9
+======
+
+看完题目之后可以分成以下步骤：
+
+由于下面要用到string 声明字符串变量，所以记得要包含string 头文件： 
+
+::
+
+    #include <string>
+
+第一步：定义Teacher类
+---------------------
+
+1. 声明成员函数和成员数据
+``````````````````````````
+
+.. code-block:: c++
+
+   /*按照题目要求声明数据成员，我这里都设置成保护的，目的是不让在类外（例如main函数）使用,
+    *当然你也可以设置成public（公有的）
+    */
+
+   class Teacher    
+   {           
+   protected:
+       Teacher(string, int, string, string, int, string); //函数声明可以只写形参的类型，构造函数参见第9章263页
+       void display();  
+
+       string    name;
+       int       age;
+       string    sex;
+       string    addr;
+       int       phone;
+       string    title;
+    };
+
+2. 类外定义成员函数
+````````````````````
+
+.. code-block:: c++
+
+   Teacher::Teacher(string n, int a, string s, string ad, int p, string t):
+        name(n), age(a), sex(s), addr(ad), phone(p), title(t){}              //关于这种构造函数的写法，参见267页9.1.4
+
+   void Teacher::display()
+   {
+        cout << "姓名：" << name << "\t年龄：" << age << "\t性别：" << sex;
+        cout << "\n地址：" << addr << "\t手机号码：" << phone << "\t职称：" << title;   
+   }
+            
+第二步：定义Cadre类
+--------------------
+
+1. 声明成员函数和成员数据
+``````````````````````````
+
+.. code-block:: c++
+
+   class Cadre
+   {   
+   protected:
+        Cadre(string, int, string, string, int, string);
+        void display();
+
+        string   name;
+        int      age;
+        string   sex;
+        string   addr;
+        int      phone;
+        string   post;
+   };
+
+2. 类外定义成员函数
+```````````````````
+
+.. code-block:: c++
+
+    Cadre::Cadre(string n, int a, string s, string ad, int p, string po):
+         name(n), age(a), sex(s), addr(ad), phone(p),post(po){}
+
+    void Cadre::display()
+    {
+         cout << "姓名：" << name << "\t年龄：" << age << "\t性别：" << sex;
+         cout << "\n地址：" << addr << "\t手机号码：" << phone << "\t职务：" << post;
+    }
+
+第三步：定义Teacher_Cadre类
+----------------------------
+
+1. 声明成员函数和成员数据
+```````````````````````````
+
+.. code-block:: c++
+
+    class Teacher_Cadre: protected Teacher, protected Cadre
+    {
+    public:
+        Teacher_Cadre(string, int, string, string, int, string, string, int);
+        void show();
+
+    protected:
+        int wages;
+    };
+
+2. 类外定义成员函数
+``````````````````````
+
+.. code-block:: c++
+
+    Teacher_Cadre::Teacher_Cadre(string n, int a, string s, string ad, int p, string t ,string po, int w):
+        Teacher(n, a, s, ad, p, t), Cadre(n, a, s, ad, p, po), wages(w){}
+
+    void Teacher_Cadre::show()
+    {
+        Teacher::display();
+        cout << "\t职务：" <<post << "\t工资 :" <<wages<<endl;
+    }
+
+最后一步：定义 main 函数
+=========================
+
+.. code-block:: c++
+
+    int main()
+    {
+        Teacher_Cadre t_g("咧威", 20, "男", "太原科大", 611959, "coder", "worker", 5900);
+        t_g.show();
+
+        return 0;
+    }

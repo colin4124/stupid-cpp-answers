@@ -1,0 +1,134 @@
+习题10
+====== 
+
+看完题目之后可以分成以下步骤：
+
+由于下面要用到string 声明字符串变量，所以记得要包含string 头文件： 
+
+::
+
+    #include <string>
+
+第一步：定义Teacher类
+--------------------
+
+1. 声明成员函数和成员数据
+```````````````````````
+
+.. code-block:: c++
+	
+	class Teacher
+	{
+	public:
+		Teacher(int, string, string);
+		void output();
+
+	private:
+		int num;
+		string name;
+		string sex;
+	};
+
+2. 类外定义成员函数
+``````````````````
+
+.. code-block:: c++
+	
+	Teacher::Teacher(int nu, string na, string s):
+		num(nu), name(na), sex(s){}
+
+	void Teacher::output()
+	{
+		cout <<"学号: " <<num <<"\t姓名: " <<name <<"\t性别: " <<sex <<'\t';
+	}
+
+第二步：定义BirthDate类
+----------------------
+
+1. 声明成员函数和成员数据
+```````````````````````
+
+.. code-block:: c++
+	
+	class BirthDate
+	{
+	public:
+		BirthDate(int, int, int);
+		void input(int, int, int);
+		void output();
+
+	private:
+		int year;
+		int month;
+		int day;
+	};
+
+2. 类外定义成员函数
+```````````````````
+
+.. code-block:: c++
+
+	BirthDate::BirthDate(int y, int m, int d):
+		year(y), month(m), day(d){}
+
+	void BirthDate::input(int y, int m, int d)
+	{
+		year  = y; 
+		month = m;
+		day   = d;
+	}
+
+	void BirthDate::output()
+	{
+		cout <<year <<"年" <<month <<"月" <<day <<"日" <<endl;
+	}
+
+第三步：定义Professor类
+-----------------------
+
+1. 声明成员函数和成员数据
+```````````````````````
+
+.. code-block:: c++
+
+	class Professor:public Teacher
+	{
+	public:
+		Professor(int, string, string, int, int, int);
+		void input(int y, int m, int d){ birthday.input(y, m, d); }
+		void output();
+
+	private:
+		BirthDate birthday;
+	};
+
+2. 类外定义成员函数
+```````````````````
+
+.. code-block:: c++
+
+	Professor::Professor(int nu, string na, string s, int y, int m, int d):
+		Teacher(nu, na, s), birthday(y, m, d){}
+
+	void Professor::output()
+	{
+		Teacher::output();
+		birthday.output();
+	}
+
+最后一步：定义 main 函数
+=========================
+
+.. code-block:: c++
+
+	int main()
+	{
+		Professor prof1(24, "colin", "male", 1993, 1, 31);
+		prof1.output();
+
+		cout << "\n这个生日是好友O的，改正下：\n";
+		prof1.input(1993, 3, 13);
+		prof1.output();
+
+		return 0;
+	}
