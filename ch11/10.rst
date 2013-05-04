@@ -1,3 +1,5 @@
+.. _ch11-xt1:
+
 习题10
 ===============================
 
@@ -57,7 +59,8 @@ Tips:
 	class Teacher
 	{
 	public:
-		Teacher(int, string, string);    //每个类都要定义构造函数，这样的好处是可以在定义一个对象时，顺便赋值
+		Teacher(int, string, string);  
+	    //每个类都要定义构造函数，这样的好处是可以在定义一个对象时，顺便赋值
 		void output();                   //题目要求最后都得输入值，所以在每个类中都定义输入的函数，派生类的就直接调用基类的就可以了
 
 	private:
@@ -76,7 +79,7 @@ Tips:
 
 	void Teacher::output()
 	{
-		cout <<"学号: " <<num <<"\t姓名: " <<name <<"\t性别: " <<sex <<'\t';
+	  cout <<"学号: " <<num <<"\t姓名: " <<name <<"\t性别: " <<sex <<'\t';
 	}
 
 第二步：定义BirthDate类
@@ -117,7 +120,7 @@ Tips:
 
 	void BirthDate::output()
 	{
-		cout <<year <<"年" <<month <<"月" <<day <<"日" <<endl;
+	  cout <<year <<"年" <<month <<"月" <<day <<"日" <<endl;
 	}
 
 第三步：定义Professor类
@@ -136,7 +139,7 @@ Tips:
 		void output();
 
 	private:
-		BirthDate birthday;
+		BirthDate birthday;             //参见 388页的继承与组合
 	};
 
 2. 类外定义成员函数
@@ -150,11 +153,12 @@ Tips:
 	void Professor::output()
 	{
 		Teacher::output();
-		birthday.output();  //这里不能是BirthDate::output(),因为已经定义了对象，直接引用对象的成员函数
+		birthday.output();  
+		//这里不能是BirthDate::output(),因为已经定义了对象，直接引用对象的成员函数
 	}
 
 最后一步：定义 main 函数
-=====================================
+---------------------------------
 
 .. code-block:: c++
 

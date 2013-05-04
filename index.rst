@@ -1,26 +1,20 @@
-.. stupid-cpp-answers documentation master file, created by
-   sphinx-quickstart on Mon Apr 29 21:25:01 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+:orphan:
 
-无脑流的谭浩强C++题解
+
+无脑流的C++题解
 =====================================
 
-目录：
-======
+.. image:: _static/cpp.png
+   :class: floatingflask
 
-第11章 继承与派生
------------------
 
-- :doc:`ch11/1`
-- :doc:`ch11/2`
-- :doc:`ch11/9`
-- :doc:`ch11/10`
+这份题解，咧威会把自己解题思路和涉及到的知识写下来，尽量让每个同学能看懂。如果还有什么问题，可以给咧威留言，或者直接通过新浪微博和电子邮件联系。
+
+.. include:: contents.rst.inc
 
 
 
-.. toctree::
-   :maxdepth: 2
+
 
 
 

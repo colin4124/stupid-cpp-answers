@@ -1,4 +1,6 @@
 stupid-cpp-answers
 ==================
 
-无脑流的谭浩强C++题解
+无脑流的C++题解
+
+[主页](http://stupidcpp.tk/)

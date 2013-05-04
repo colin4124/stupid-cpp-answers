@@ -1,3 +1,5 @@
+.. _ch11-xt9:
+
 习题9
 ======
 
@@ -24,7 +26,9 @@
    class Teacher    
    {           
    protected:
-       Teacher(string, int, string, string, int, string); //函数声明可以只写形参的类型，构造函数参见第9章263页
+       Teacher(string, int, string, string, int, string); 
+       //函数声明可以只写形参的类型，构造函数参见第9章263页
+
        void display();  
 
        string    name;
@@ -41,12 +45,13 @@
 .. code-block:: c++
 
    Teacher::Teacher(string n, int a, string s, string ad, int p, string t):
-        name(n), age(a), sex(s), addr(ad), phone(p), title(t){}              //关于这种构造函数的写法，参见267页9.1.4
+        name(n), age(a), sex(s), addr(ad), phone(p), title(t){}
+      //关于这种构造函数的写法，参见267页9.1.4
 
    void Teacher::display()
    {
-        cout << "姓名：" << name << "\t年龄：" << age << "\t性别：" << sex;
-        cout << "\n地址：" << addr << "\t手机号码：" << phone << "\t职称：" << title;   
+      cout << "姓名：" << name << "\t年龄：" << age << "\t性别：" << sex;
+      cout << "\n地址：" << addr << "\t手机号码：" << phone << "\t职称：" << title;   
    }
             
 第二步：定义Cadre类
@@ -81,8 +86,8 @@
 
     void Cadre::display()
     {
-         cout << "姓名：" << name << "\t年龄：" << age << "\t性别：" << sex;
-         cout << "\n地址：" << addr << "\t手机号码：" << phone << "\t职务：" << post;
+      cout << "姓名：" << name << "\t年龄：" << age << "\t性别：" << sex;
+      cout << "\n地址：" << addr << "\t手机号码：" << phone << "\t职务：" << post;
     }
 
 第三步：定义Teacher_Cadre类
@@ -113,12 +118,12 @@
 
     void Teacher_Cadre::show()
     {
-        Teacher::display();
-        cout << "\t职务：" <<post << "\t工资 :" <<wages<<endl;
+      Teacher::display();
+      cout << "\t职务：" <<post << "\t工资 :" <<wages<<endl;
     }
 
 最后一步：定义 main 函数
-=========================
+---------------------------------
 
 .. code-block:: c++
 
