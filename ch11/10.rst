@@ -61,12 +61,13 @@ Tips:
 	public:
 		Teacher(int, string, string);  
 	    //每个类都要定义构造函数，这样的好处是可以在定义一个对象时，顺便赋值
-		void output();                   //题目要求最后都得输入值，所以在每个类中都定义输入的函数，派生类的就直接调用基类的就可以了
+		void output();   
+        //题目要求最后都得输入值，所以在每个类中都定义输入的函数，派生类的就直接调用基类的就可以了
 
 	private:
-		int num;
-		string name;
-		string sex;
+		int     num;
+		string  name;
+		string  sex;
 	};
 
 2. 类外定义成员函数
