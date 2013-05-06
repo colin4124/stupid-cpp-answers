@@ -1,0 +1,74 @@
+.. _ch11-xt4: 
+
+习题4
+================
+
+这里咧威将给出详细的代码吧
+
+.. code-block:: c++
+
+	#include <iostream> 
+	#include <string>   
+	using namespace std; 
+
+	class Student
+	{
+	public:
+		void get_value() { cin >> num >> name >> sex; }
+		void display();
+	protected:   //这里改成保护的，这样在派生类中就可以直接引用这些数据了
+		int    num;
+		string name;  
+		char   sex;
+
+	};
+
+	void Student::display()
+	{
+		cout<<"num: "<<num<<endl;
+ 		cout<<"name:"<<name<<endl;
+ 		cout<<"sex:"<<sex<<endl;
+	}
+
+	class Student1: public Student
+	{
+	public:
+		void get_value_1();
+		void display_1();
+	
+	private:
+		int age;
+		string addr;
+	};
+
+		
+	void Student1::get_value_1()
+	{
+		//不需要使用基类的输入函数, 在main函数中直接调用
+		cin >> age >> addr;
+	}
+
+	void Student1::display_1()
+	{
+		//不需要使用基类的输出函数, 在main函数中直接调用
+		cout << "age:" << age << endl;
+		cout << "address:" << addr <<endl;
+	}
+
+	int main()
+	{
+		Student1 stud;
+		cout << "请输入学号，姓名，性别，年龄和地址:\n";
+		//公有继承, 原来的公有函数现在还是公有，所以可以直接调用
+
+		stud.get_value();	
+		stud.get_value_1();
+		stud.display();
+		stud.display_1();
+
+		return 0;
+	}
+
+   
+
+

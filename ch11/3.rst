@@ -1,0 +1,72 @@
+.. _ch11-xt3:
+ 
+习题3
+================
+
+打开356页看到例11.3  。咧威觉得书上对例11.3解释得非常详细，强烈建议不懂保护继承的同学认真看一遍。
+
+这里咧威将给出详细的代码吧
+
+.. code-block:: c++
+
+	#include <iostream> 
+	#include <string>   
+	using namespace std; 
+
+	class Student
+	{
+	public:
+		void get_value() { cin >> num >> name >> sex; }
+		//例题11.3在这里应该是有 display() 这个函数的,原因后面会有解释
+
+	protected:   //这里改成保护的，这样在派生类中就可以直接引用这些数据了
+		int    num;
+		string name;  
+		char   sex;
+
+	};
+
+	class Student1: protected Student
+	{
+	public:
+		void get_value_1();
+		void display_1();
+	
+    	private:
+		int age;
+		string addr;
+	};
+
+		
+	void Student1::get_value_1()
+	{
+		get_value();
+		//直接使用基类的输入函数, 不用再重复敲一遍输出数据的代码
+
+		cin >> age >> addr;
+	}
+
+	void Student1::display_1()
+	{
+		//把基类的display() 删掉，是因为直接在派生类引用基类的数据，
+		//而不是间接地调用基类的函数。
+		cout << "num: "<<num<<endl;
+ 		cout << "name: "<<name<<endl;
+ 		cout << "sex: "<<sex<<endl;
+		cout << "age: " << age << endl;
+		cout << "address: " << addr <<endl;
+	}
+
+	int main()
+	{
+		Student1 stud;
+		cout << "请输入学号，姓名，性别，年龄和地址:\n";
+		stud.get_value_1();
+		stud.display_1();
+
+		return 0;
+	}
+
+   
+
+
