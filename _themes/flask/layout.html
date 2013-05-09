@@ -1,4 +1,14 @@
 {%- extends "basic/layout.html" %}
+ 
+{% set css_files = css_files + ["_static/UItoTop/css/ui.totop.css"] %}
+<!-- jquery --> 
+        {% set script_files = script_files + ["_static/UItoTop/js/jquery-1.7.2.min.js"] %}      
+        <!-- easing plugin ( optional ) -->
+        {% set script_files = script_files + ["_static/UItoTop/js/easing.js"] %} 
+         <!-- UItoTop plugin -->
+         {% set script_files = script_files + ["_static/UItoTop/js/jquery.ui.totop.min.js"] %} 
+        <!-- Starting the plugin -->
+ 
 {%- block extrahead %}
   {{ super() }}
   {% if theme_touch_icon %}
@@ -28,7 +38,8 @@
             {% block body %} {% endblock %}
 
             {% include "duoshuo.html" %}
-
+            {% include "UItoTop.html" %}
+            
           </div>
       {%- if render_sidebar %}
         </div>
@@ -51,5 +62,14 @@
   {%- block innerfooter %}{%- endblock %}
   {% if pagename == 'index' %}
   </div>
+  
   {% endif %}
 {%- endblock %}
+
+        
+
+
+           
+
+
+        
