@@ -1,0 +1,172 @@
+.. _ch12-xt1:
+
+习题1
+=======
+
+| 题目要求对例题12.1进行修改，将类的定义写到头文件（后缀为.h），类的成员函数声明部分写到源文件（后缀为.cpp）。
+| 所以先打开396页看这道例题
+
+Ponit类
+--------
+
+定义Point类
+``````````````
+
+新建point.h 头文件
+
+
+.. code-block:: c++ 
+
+   class Point
+   {
+   public:
+        Point(double a = 0, double b = 0): x(a), y(b){};
+        void setPoint(double a, double b) { x = a, y = b;} 
+        double getX() const { return x;}
+        double getY() const { return y;}
+        friend ostream & operator << ( ostream &, const Point &);
+
+    protected:
+        double x;
+        double y;
+    }; 
+
+
+声明Point类的成员函数
+````````````````````````
+
+新建point.cpp文件
+
+.. code-block:: c++ 
+
+   #include <iostream>
+
+   ostream & operator << ( ostream &output, const Point &p)
+   {
+        output << "(" << p.x <<"," <<p.y <<")"<<endl;
+        return output; 
+   }
+
+Circle类
+----------
+
+定义Circle类
+``````````````
+
+新建circle.h文件
+
+.. code-block:: c++ 
+
+   #include "point.h"
+
+   const double pi = 3.14159; 
+
+   class Circle: public Point
+   {
+   public:
+        Circle(double x=0, double y=0, double r=0):Point(x, y), radius(r){}
+        void setRadius(double r){ radius = r ;}
+        double getRadius() const { return radius;}
+        double area() const { return pi * radius * radius;} 
+        friend ostream & operator << ( ostream &, const Circle &);
+   protected:
+        double radius;
+   };
+
+声明Circle类的成员函数
+````````````````````````
+
+新建circle.cpp文件
+
+.. code-block:: c++ 
+
+   ostream & operator << ( ostream &output, const Circle &c)
+   {
+      output << "圆点 = (" << c.x << "," << c.y <<")" <<", r = " <<c.radius ;
+      output <<", 面积 = " << c.area() <<endl;
+   }
+
+Cylinder类
+------------
+
+定义Cylinder类
+``````````````
+
+新建Cylinder.h文件
+
+.. code-block:: c++ 
+
+   #include "circle.h"
+   
+   class Cylinder : public Circle
+   {
+   public:
+      Cylinder (double x, double y, double r, double h): 
+          Circle(x,y,r),height(h){}
+
+      void setHeight(double h) { height = h;}
+      double getHeight() { return height;}
+      double area() const
+      { 
+          return 2*Circle::area() + 2 * pi * radius * height; 
+      }
+
+      double volume() const
+      {
+          return Circle::area() * height;
+      }
+
+      friend ostream & operator << ( ostream &, const Cylinder &);
+
+   protected:
+        double height;
+   };
+                                 
+
+声明Cylinder类的成员函数
+````````````````````````
+
+新建Cylinder.cpp文件
+
+.. code-block:: c++ 
+
+   ostream & operator << ( ostream &output, const Cylinder &cy)
+   {
+    output << "圆点 = (" << cy.x << "," << cy.y <<")" <<", r = " <<cy.radius;
+    output << ", 表面积 =" << cy.area() << ", 体积 =" << cy.volume() <<endl;
+    return output;
+   } 
+ 
+写main函数
+------------
+
+新建main.cpp文件
+
+.. code-block:: c++ 
+
+   #include <iostream>
+   using namespace std;
+   #include "cylinder.h"
+   #include "point.cpp"
+   #include "circle.cpp"
+   #include "cylinder.cpp"
+
+   int main()
+   {
+        Cylinder cy(1.0, 2.0, 3.0, 4.0);
+        cout << cy ;
+        cy.setPoint(2.4 , 5.9);
+        cy.setRadius(13);
+        cy.setHeight(14);
+        cout << cy;
+
+        Point &pRef =cy;
+        cout << "点 =" << pRef<<endl;
+
+        Circle &cRef =cy;
+        cout << "圆 =" <<cRef <<endl;
+
+        return 0;
+    } 
+
+          

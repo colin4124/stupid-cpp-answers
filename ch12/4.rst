@@ -1,0 +1,124 @@
+.. _ch12-xt4:
+
+习题4
+=======
+
+
+定义抽象基类Shape
+-------------------
+
+.. code-block:: c++ 
+
+   #include <iostream>
+   using namespace std;
+
+   class Shape
+   {
+   public:
+        virtual float area() const =0;
+   }; 
+
+   class Circle:public Shape
+   {
+   public:
+        Circle(float r):radius(r){}
+        virtual float area() const
+        {
+            return 3.14 * radius * radius;
+        }
+
+    protected:
+        float radius;
+    };
+
+派生类Circle(圆形)
+--------------------
+
+.. code-block:: c++ 
+
+   class Circle:public Shape
+   {
+   public:
+        Circle(float r):radius(r){}
+        virtual float area() const
+        {
+            return 3.14 * radius * radius;
+        }
+
+   protected:
+        float radius;
+   };
+                            
+派生类Rectangle(矩形)
+----------------------
+
+.. code-block:: c++ 
+
+   class Rectangle: public Shape
+   {
+   public:
+        Rectangle(float h, float w): height(h), width(w){}
+        virtual float area() const
+        {
+            return height * width;
+        }
+
+    protected:
+        float height;
+        float width;
+    };
+
+派生类Triangle（三角形）
+-------------------------
+
+.. code-block:: c++ 
+
+   class Triangle: public Shape
+   {
+   public:
+        Triangle(float h, float l): height(h), lenght(l){}
+        virtual float area() const
+        {
+            return 0.5 * height * lenght;
+        }
+
+   protected:
+        float height;
+        float lenght;
+   };
+
+输出面积的函数printArea
+-------------------------
+
+.. code-block:: c++ 
+
+   void printArea(const Shape &s) 
+   {
+    cout << s.area()<<endl;
+   }
+
+
+写main函数
+------------
+
+.. code-block:: c++ 
+
+   int main()
+   {
+       Circle circle(2.4);
+       cout << "圆的面积是: ";
+       printArea(circle);
+
+       Rectangle rectangle(1.3, 1.4);
+       cout <<"矩形的面积是： ";
+       printArea(rectangle);
+
+       Triangle tri(2.4, 5.9);
+       cout << "三角形的面积是：";
+       printArea(tri);
+
+       return 0;
+
+   }
+
+          
