@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# 无脑流的谭浩强C++解 documentation build configuration file, created by
+# 无脑流的C++解 documentation build configuration file, created by
 # sphinx-quickstart on Wed May  1 17:32:31 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'无脑流的谭浩强C++题解'
+project = u'无脑流的C++题解'
 copyright = u'2013, 咧威'
 
 # The version info for the project you're documenting, acts as replacement for

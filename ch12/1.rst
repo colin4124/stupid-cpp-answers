@@ -6,10 +6,23 @@
 | 题目要求对例题12.1进行修改，将类的定义写到头文件（后缀为.h），类的成员函数声明部分写到源文件（后缀为.cpp）。
 | 所以先打开396页看这道例题
 
+**一般每次的开头都先写的，现在只在main.cpp里写，其他的文件不用写上。**
+
+.. code-block:: c++
+
+   #include <iostream>
+   using namespace std;
+
+因为最后其他的文件都得要包含到main函数所在的main.cpp文件里的。
+
+**相当于把以前每一个类的声明，类外成员函数的定义都独立剪切到一个文件里。**
+
+每个派生类都包含它所继承的类，最后在main.cpp文件里只需包含最终的派生类就可以了。
+
 Ponit类
 --------
 
-定义Point类
+声明Point类
 ``````````````
 
 新建point.h 头文件
@@ -17,7 +30,8 @@ Ponit类
 
 .. code-block:: c++ 
 
-   class Point
+   class Point   //它是基类，所以不需要包含头文件
+
    {
    public:
         Point(double a = 0, double b = 0): x(a), y(b){};
@@ -32,14 +46,12 @@ Ponit类
     }; 
 
 
-声明Point类的成员函数
-````````````````````````
+类外定义Point类的成员函数
+`````````````````````````````
 
 新建point.cpp文件
 
 .. code-block:: c++ 
-
-   #include <iostream>
 
    ostream & operator << ( ostream &output, const Point &p)
    {
@@ -50,16 +62,15 @@ Ponit类
 Circle类
 ----------
 
-定义Circle类
+声明Circle类
 ``````````````
 
 新建circle.h文件
 
 .. code-block:: c++ 
 
-   #include "point.h"
-
-   const double pi = 3.14159; 
+   #include "point.h"      //包含了它继承的point基类
+   const double pi = 3.14159; //下面算面积的时候，pi就代表这个数值
 
    class Circle: public Point
    {
@@ -73,8 +84,8 @@ Circle类
         double radius;
    };
 
-声明Circle类的成员函数
-````````````````````````
+类外定义Circle类的成员函数
+````````````````````````````
 
 新建circle.cpp文件
 
@@ -89,14 +100,14 @@ Circle类
 Cylinder类
 ------------
 
-定义Cylinder类
-``````````````
+声明Cylinder类
+````````````````
 
 新建Cylinder.h文件
 
 .. code-block:: c++ 
 
-   #include "circle.h"
+   #include "circle.h"  //包含了它继承的Circle类
    
    class Cylinder : public Circle
    {
@@ -123,8 +134,8 @@ Cylinder类
    };
                                  
 
-声明Cylinder类的成员函数
-````````````````````````
+类外定义Cylinder类的成员函数
+`````````````````````````````
 
 新建Cylinder.cpp文件
 
@@ -144,10 +155,10 @@ Cylinder类
 
 .. code-block:: c++ 
 
-   #include <iostream>
-   using namespace std;
-   #include "cylinder.h"
-   #include "point.cpp"
+   #include <iostream>   //之前的做法，把类的声明和main函数都写在同一个文件，
+   using namespace std;  //现在只不过是把它们分开而已，所以现在得按顺序包含进来
+   #include "cylinder.h" //先声明类，再在类外定义成员函数，所以的一个先包含声明类的头文件
+   #include "point.cpp"  //类外成员函数的定义，按顺序包含进来就可以了
    #include "circle.cpp"
    #include "cylinder.cpp"
 
