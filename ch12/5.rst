@@ -1,0 +1,142 @@
+.. _ch12-xt5:
+
+习题5
+=======
+
+
+定义抽象基类Shape
+-------------------
+
+.. code-block:: c++ 
+
+   #include <iostream>
+   #define PI 3.1415926  //定义计算圆的面积pi的值
+   using namespace std; 
+
+   class Shape
+   {
+   public:
+      virtual double area() const = 0;
+   };
+
+
+定义Shape的派生类Circle(圆形)
+-------------------------------
+
+.. code-block:: c++ 
+
+   class Circle : public Shape
+   {
+   public:
+      Circle(double r):radius(r){}
+      virtual double area() const 
+      {
+         return PI * radius * radius;
+      }
+
+   protected:
+      double radius;
+   };
+
+
+定义Shape的派生类Square(正方形)
+----------------------------------
+
+.. code-block:: c++ 
+
+   class Square : public Shape
+   {
+   public:
+      Square(double s):side(s){}
+      virtual double area() const 
+      {
+         return side * side;
+      }
+   
+   protected:
+      double side;
+   };
+
+定义Shape的派生类Rectangle(矩形)
+-----------------------------------
+
+.. code-block:: c++ 
+
+   class Rectangle : public Shape
+   {
+   public:
+      Rectangle(double h, double w):height(h),width(w){}
+      virtual double area() const
+      {
+          return height * width;
+      }
+   protected:
+      double height;
+      double width;
+
+   };
+
+定义Shape的派生类Trapezoid(梯形)
+-----------------------------------
+
+.. code-block:: c++ 
+
+   class Trapezoid: public Shape
+   {
+   public:
+       Trapezoid(double t, double b, double h):top(t), bottom(b), height(h){}
+       virtual double area() const
+       {
+           return (top + bottom) * height / 2;
+       }
+   protected:
+       double top;
+       double bottom;
+       double height;
+   };
+
+定义Shape的派生类Triangle(三角形)
+-----------------------------------
+  
+.. code-block:: c++ 
+  
+   class Triangle: public Shape
+   {
+   public:
+      Triangle(double b, double h):bottom(b), height(h){}
+      virtual double area() const
+      {
+          return bottom * height / 2;
+      }
+   protected:
+      double bottom;
+      double height;
+   };
+
+写main函数
+------------
+
+.. code-block:: c++ 
+
+   int main()
+   {
+      Circle circle(2.4);
+      Square square(4.0);
+      Rectangle rectangle(3.0, 5.0);
+      Trapezoid trapezoid(3.0, 2.0, 4.0);
+      Triangle triangle(2.4, 5.9);
+
+      Shape *pt[5]={&circle, &square, &rectangle, &trapezoid, &triangle};
+
+      double areas = 0.0;
+      for (int i = 0; i < 5; i++)
+      {
+         areas += pt[i] -> area();
+      }
+
+      cout << "总面积是：" << areas <<endl;
+
+      return 0;
+   } 
+
+          
