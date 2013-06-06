@@ -6,3 +6,4 @@
 
    ch11/index
    ch12/index
+   ch8/index
