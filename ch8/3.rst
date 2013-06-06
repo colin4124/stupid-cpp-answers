@@ -1,0 +1,46 @@
+.. _ch8-xt3:
+
+习题3
+=========
+
+**和习题2 对比着看**
+
+
+.. code-block:: c++ 
+
+   #include <iostream>
+   using namespace std;
+
+   class Time 
+   {
+   public:
+       void set_time(void);    //把函数体部分删掉，加个分号就OK 了
+	   void show_time(void);
+
+    private:
+	   int hour;            //把数据成员放在 private: 下面就行了
+	   int minute;
+	   int sec;
+    };                      //不要忘了分号
+
+    //把原来类内的函数剪切到类外时， 别忘了加上 类名 和 作用域符号 Time::
+
+    void Time::set_time(void)  
+	{
+		cin >> hour;
+		cin >> minute;
+		cin >> sec;
+	}
+
+	void Time::show_time(void)
+	{
+		cout << hour <<":" <<minute <<":" <<sec <<endl;
+	}
+
+    int main()
+    {
+	   Time t;
+	   t.set_time();
+	   t.show_time();
+	   return 0; 
+    }	
