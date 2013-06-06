@@ -1,0 +1,66 @@
+.. _ch8-xt6:
+
+习题6 (大题有可能考)
+======================
+
+**思路：**
+
+1. 先声明一个长方体的类 Box, 里面有长方体的属性（数据），长宽高和体积。
+2. 然后定义三个成员函数来实现输入，计算体积和输出三个功能
+3. 最后就是用这个类来定义出三个长方体对象 v1, v2, v3。
+4. 定义完之后就可以引用 输入，计算体积和输出三个函数。
+
+.. code-block:: c++ 
+
+   #include <iostream>
+   using namespace std;
+
+   class Box        //体积的英文名，如果觉得长，考试的时候可以写tiji，体积的拼音
+   {
+   public:                //函数一般都是公有的，就是写在 public 下面
+	  void Input();       //声明输入长方体长，宽，高的函数
+	  void Get();         //计算长方体体积的函数
+	  void Output();      //输出长方体体积的函数
+   private:                //数据一般是私有的，放在 private 下面             
+	  int length;           //数据声明了 长， 宽，高为整型数据，它们的值只能是整数    
+	  int width; 
+	  int height;
+	  float Box;         //声明体积为浮点型数据，可以有小数点，精度要高些
+   };                        //别忘记分号啊
+
+   void Box::Input()      //类外定义函数，别忘了类名 + :: + 函数名
+   {
+	  cin >> length;
+	  cin >> width;
+	  cin >> height;
+   }   
+
+   void Box::Get()
+   {
+	  Box = length * width * height;
+   }
+		
+   void Box::Output()
+   {
+	  cout <<Box<<endl;
+   }
+      int main()
+   {
+      Box v1,v2,v3;    //定义三个长方体的对象 v1, v2, v3
+
+	  cout <<"请输入三个长方体的长，宽，高\n";
+	  v1.Input();         //调用输入函数
+	  v2.Input();
+	  v3.Input();
+
+	  v1.Get();           //调用计算体积的函数
+	  v2.Get();
+	  v3.Get();
+
+	  cout << "三个长方体的体积分别是:\n";
+	  v1.Output();        //调用输出函数
+	  v2.Output();
+   	  v3.Output();
+	
+	 return 0; 
+   }
