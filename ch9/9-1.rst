@@ -1,0 +1,281 @@
+.. _ch9-9-1:
+
+9.1 构造函数
+===============
+
+构造函数是用来处理对象的初始化。也是给对象初始值
+
+**构造函数的名字必须也类名相同。不具备任何类型和返回值，所以不要在前面加void之类的**
+
+一般形式
+-----------
+
+用例子来说明：
+
+.. code-block:: c++ 
+
+    class Time
+    {
+    public:
+       Time()       //初始值为 0 时 0 分 0 秒
+       {
+         hour = 0;
+         min  = 0;
+         sec  = 0;
+       } 
+
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+从例子中看到，一般的构造函数写法
+
+ **类名()**
+
+ {
+
+	  数据 = 初始值;
+
+ }
+
+类外定义构造函数
+
+ **类名::类名()** 
+ {
+  
+    数据 = 初始值;
+ 
+ }
+
+带参数的构造函数
+-----------------
+
+例子：
+
+.. code-block:: c++ 
+
+    class Time
+    {
+    public:
+       Time(int h, int m, int s)    
+       {
+         hour = h;
+         min  = m;
+         sec  = s;
+       } 
+
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+    int main()
+    {                      //按顺序依次把括号的值赋予给 h, m, s
+       Time t1(0, 0, 0);   //初始值为 0 时 0 分 0 秒
+       Time t2(1, 2, 3);   //初始值为 1 时 2 分 3 秒
+                           //括号里的值不同，则可以给不同对象赋予不同的初始值
+       return 0;
+    }
+
+参数初始化表的方式
+---------------------
+
+**之前的带参数的构造函数写法**
+
+.. code-block:: c++ 
+
+    class Time
+    {
+    public:
+       Time(int h, int m, int s)    
+       {
+         hour = h;
+         min  = m;
+         sec  = s;
+       } 
+
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+
+**改成参数初始化表**
+
+.. code-block:: c++ 
+
+    class Time
+    {
+    public:
+       Time(int h, int m, int s): hour(h), min(m), sec(s)   
+       {
+  
+       } 
+
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+在Time(int h, int m, int s)加个冒号 **:** 数据成语加括号，括号里写参数。hour(h) 意思相当于 hour = h; 其实就是把大括号里的 hour = h; 拿出来改写成 hour(h) 的形式 
+
+构造函数的重载
+------------------
+
+| 当一个类中定义很多个构造函数的时候，提供不用的初始化的方法，供我们选用。
+| 具有相同的名字，而参数的个数或者类型不相同，这样才能区分你选用的是哪个构造函数。
+
+.. code-block:: c++ 
+
+    class Time
+    {
+    public:
+       Time()          //有两个构造函数，一个没有参数，另一个括号里有三个参数
+       {
+          hour = 0;
+          min  = 0;
+          sec  = 0;
+       }
+       Time(int h, int m, int s) 
+       {
+          hour = h;
+          min  = m;
+          sec  = s;
+       } 
+
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+    int main()
+    {                     
+       Time t1;            //没有参数，所以使用的是上面的第一个构造函数，注意不要写成t1()
+                           //如何没有参数就用括号里了
+                           //初始值为 0 时 0 分 0 秒
+       Time t2(1, 2, 3);   //括号里有三个参数，符合第二个构造函数
+                           //初始值为 1 时 2 分 3 秒
+                           //这里是根据参数的个数来决定调用哪个构造函数
+       return 0;
+    }
+
+**尽管一个类中可以包含多个构造函数，但是定义一个对象时，只能选择一个。**
+
+使用默认参数的构造函数
+-------------------------
+
+一般的构造函数没有参数，直接个成员数据赋值，如 hour = 0;
+
+对比 有参数的构造函数 和 有默认参数的构造函数 
+
+.. code-block:: c++ 
+
+    class Time     
+    {
+    public:
+    //有参数的构造函数                   有默认参数的构造函数                   
+                                    |    //全部参数都要赋初值      
+       Time(int h, int m, int s)    |   Time(int h=1, int m=2, int s=3)  
+       {                            |   {             
+          hour = h;                 |      hour = h;
+          min  = m;                 |      min  = m; 
+          sec  = s;                 |      sec  = s;
+       }                            |   }
+                                    
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+默认参数就是在括号里的参数先赋值，比如 Time(int h=1, int m=2, int s=3) 就是先给参数 h, m, s 分别赋值 h=1. m=2, s=3
+
+使用默认参数的构造函数，相当于 一般构造函数(无参数的) +　有参数的构造函数
+
+假设在类中已经定义　有默认参数的构造函数
+
+.. code-block:: c++ 
+
+    class Time     
+    {
+    public:
+    //　有默认参数的构造函数                   
+                                  
+  　   Time(int h=1, int m=2, int s=3) 
+       {                           
+          hour = h;                
+          min  = m;                
+          sec  = s;                 
+       }                           
+                                    
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+在main 函数中定义对象时，可以达到 一般构造函数和 有参数的构造函数的功能
+
+.. code-block:: c++ 
+
+    int main()
+    {
+       Time t1;     //相当于一般的构造函数，默认值为上面指定的默认参数的值
+                    // int h=1, int m=2, int s=3 所以初始值为 1 时 2 分 3 秒
+       Time t2(7);  // 7 赋值参数h, m, s没有指定，所以 m, s保持的是默认值
+                    // t2的初始值为 7 时 2 分 3 秒
+       Time t3(7, 8);    // 7 和 8 依次赋值给参数 h, m 而 s 没有指定还保留默认值 3
+                         //所以 t3 的初始值为 7 时 8 分 3 秒
+       Time t4(7, 8, 9)  // 7， 8， 9 依次赋值给参数 h, m, s 
+                         // 所以 t4 的初始值为 7 时 8 分 9 秒
+    }
+
+因为 **有默认参数的构造函数** 可以实现 **一般构造函数** 和 **有参数的构造函数** 的功能，使用 **有默认参数的构造函数** 的写法时，就不要出现 **一般构造函数** 或者 **有参数构造函数 的写法**
+
+**下面写法是错的**
+
+.. code-block:: c++ 
+
+    class Time
+    {             //同时出现下列形式的构造函数时，是错的
+    public:
+       Time()          //一般构造函数 括号里没有参数
+       {
+          hour = 0;
+          min  = 0;
+          sec  = 0;
+       }
+       Time(int h, int m, int s)  //有参数的构造函数
+       {
+          hour = h;
+          min  = m;
+          sec  = s;
+       } 
+
+       Time(int h=1, int m=2, int s=3)  //有默认参数的构造函数
+       {                           
+          hour = h;                
+          min  = m;                
+          sec  = s;                 
+       }       
+                              
+    private:
+       int hour;
+       int min;
+       int sec;
+    };            //别忘记写分号
+
+
+    
+
+
+
+
+
+
